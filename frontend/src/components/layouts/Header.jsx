@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaSearch, FaUser, FaShoppingBag, FaBars, FaTimes } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -13,6 +13,11 @@ function Header() {
     { name: 'About Us', path: '/about-us' },
     { name: 'Blog', path: '/blog' },
   ];
+  const navigate = useNavigate()
+  const Cart =() =>{
+    navigate('/cart')
+  }
+  
 
   return (
     <header className="bg-gray-50 shadow">
@@ -68,7 +73,7 @@ function Header() {
             <FaUser className="text-xl hover:text-primary-color" />
             <span className="text-xs">Account</span>
           </div>
-          <div className="flex flex-col items-center">
+          <div onClick={Cart} className="flex flex-col items-center">
             <FaShoppingBag className="text-xl hover:text-primary-color" />
             <span className="text-xs">Cart</span>
           </div>
