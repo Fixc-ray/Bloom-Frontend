@@ -65,7 +65,7 @@ function Header() {
             <span className="text-xs">Search</span>
           </div>
           <div className="flex flex-col items-center">
-          <Link to={'/checkout'} className='flex flex-col items-center'>
+          <Link to={'/account'} className='flex flex-col items-center'>
           <FaUser className="text-xl hover:text-primary-color" />
           <span className="text-xs">Account</span>
           </Link>
