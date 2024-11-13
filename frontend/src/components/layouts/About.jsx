@@ -5,8 +5,8 @@ import Shipping from "./Shipping";
 import FAQs from "../common/FAQ'S";
 
 const About_us = () => (
-  <div className="border p-4">
-    <h1 className="text-lg font-medium mb-4"><span className="text-primary-color">Bloom</span> Beauty</h1>
+  <div className="border rounded p-4 shadow-md ">
+    <h1 className="text-2xl font-semibold  mb-4"><span className="text-2xl font-semibold text-primary-color">Bloom</span> Beauty</h1>
     <p>Welcome to Bloom Beauty, your ultimate destination for premium beauty products designed to elevate your personal care and confidence. In today’s fast-paced world, we understand that both men and women strive to present their best selves and embrace their unique beauty. At Bloom Beauty, we believe that self-care is not just a luxury but a vital part of feeling empowered and attractive.
 
 Our mission is to make top-quality beauty products accessible to everyone, anywhere. We offer an extensive range of products, from skincare essentials and makeup must-haves to haircare and wellness solutions—all curated to meet the diverse needs of our customers. With an emphasis on convenience, we have streamlined our e-commerce platform to ensure a seamless shopping experience, enabling you to browse and order at any time, from anywhere.
@@ -23,9 +23,9 @@ const Shipp = () => (
   </div>
 );
 
-const OrdersTable = () => (
+const Contact = () => (
   <div>
-    <h2 className="text-lg font-medium mb-4">Orders</h2>
+    <h2 className="text-lg font-medium mb-4">Contact</h2>
     {/* Add table for orders */}
   </div>
 );
@@ -74,11 +74,11 @@ const AccountPage = () => {
 
         <div className="lg:w-2/3  p-4  w-full">
           {activeSection === "Contact information" && (
-            <ContactInformationForm />
+            <About_us />
           )}
           {activeSection === "About us" && <About_us />}
-          {activeSection === "Shipping and returns" && <OrdersTable />}
-          {activeSection === "Contact" && <Shipp />}
+          {activeSection === "Shipping & Returns" && <Shipp />}
+          {activeSection === "Contact" && <Contact />}
           {activeSection === "FAQ's" && <WishlistTable />}
         </div>
       </div>

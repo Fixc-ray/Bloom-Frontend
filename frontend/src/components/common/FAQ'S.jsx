@@ -35,7 +35,7 @@ const FAQs = () => {
   ];
 
   return (
-    <div className="faq-section p-6 bg-white rounded shadow-md">
+    <div className="faq-section p-6 bg-white border rounded shadow-md">
       <h2 className="text-2xl font-semibold mb-4">Frequently Asked Questions</h2>
       {faqData.map((faq, index) => (
         <div key={index} className="mb-4">
