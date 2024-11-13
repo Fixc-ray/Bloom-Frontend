@@ -70,8 +70,10 @@ function Header() {
             <span className="text-xs">Search</span>
           </div>
           <div className="flex flex-col items-center">
-            <FaUser className="text-xl hover:text-primary-color" />
-            <span className="text-xs">Account</span>
+          <Link to={'/account'} className='flex flex-col items-center'>
+          <FaUser className="text-xl hover:text-primary-color" />
+          <span className="text-xs">Account</span>
+          </Link>
           </div>
           <div onClick={Cart} className="flex flex-col items-center">
             <FaShoppingBag className="text-xl hover:text-primary-color" />
