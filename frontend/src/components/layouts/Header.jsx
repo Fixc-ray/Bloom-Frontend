@@ -10,7 +10,7 @@ function Header() {
     { name: 'Shop All', path: '/shop-all' },
     { name: 'Bestsellers', path: '/best-sellers' },
     { name: 'Collection', path: '/collection' },
-    { name: 'About Us', path: '/about-us' },
+    { name: 'About Us', path: '/about' },
     { name: 'Blog', path: '/blog' },
   ];
   const navigate = useNavigate()
