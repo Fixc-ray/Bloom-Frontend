@@ -7,6 +7,7 @@ import Footer from './components/layouts/Footer';
 import CheckoutForm from './components/layouts/CheckoutForm';
 import AccountPage from './components/layouts/AccountPage';
 import Signup from './components/layouts/Signup';
+import ShopAll from './components/layouts/ShopAll';
 
 function App() {
   const location = useLocation();
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/shop-all" element={<ShopAll />} />
         <Route path="/account/checkout" element={<CheckoutForm />} />
         <Route path="/account" element={<AccountPage/>} />
         <Route path="/signup" element={<Signup/>} />

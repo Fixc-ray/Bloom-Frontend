@@ -30,7 +30,7 @@ const Contact = () => (
   </div>
 );
 
-const WishlistTable = () => (
+const FAQ = () => (
   <div>
     <FAQs />
   </div>
@@ -79,7 +79,7 @@ const AccountPage = () => {
           {activeSection === "About us" && <About_us />}
           {activeSection === "Shipping & Returns" && <Shipp />}
           {activeSection === "Contact" && <Contact />}
-          {activeSection === "FAQ's" && <WishlistTable />}
+          {activeSection === "FAQ's" && <FAQ />}
         </div>
       </div>
     </div>
