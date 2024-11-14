@@ -26,6 +26,7 @@ function App() {
         <Route path="/account/checkout" element={<CheckoutForm />} />
         <Route path="/account" element={<AccountPage/>} />
         <Route path="/signup" element={<Signup/>} />
+        <Route path='/cart' element={<Cart />} />
       </Routes>
       
        <Footer />

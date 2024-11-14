@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ChevronRight } from "lucide-react";
 import ContactInformationForm from "../common/ContactInformationForm";
+import OrderHistory from "../common/OrderHistory";
 
 const ChangePasswordForm = () => (
   <div>
@@ -75,7 +76,7 @@ const AccountPage = () => {
           )}
           {activeSection === "Change password" && <ChangePasswordForm />}
           {activeSection === "Addresses" && <AddressesForm />}
-          {activeSection === "Orders" && <OrdersTable />}
+          {activeSection === "Orders" && <OrderHistory />}
           {activeSection === "Wishlist" && <WishlistTable />}
         </div>
       </div>
