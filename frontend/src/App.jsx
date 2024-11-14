@@ -22,6 +22,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/account/checkout" element={<CheckoutForm />} />
         <Route path="/account" element={<AccountPage/>} />
+        <Route path='/cart' element={<Cart />} />
       </Routes>
       
        <Footer />
