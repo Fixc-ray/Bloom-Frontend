@@ -6,6 +6,7 @@ import Header from './components/layouts/Header';
 import Footer from './components/layouts/Footer';
 import CheckoutForm from './components/layouts/CheckoutForm';
 import AccountPage from './components/layouts/AccountPage';
+import Signup from './components/layouts/Signup';
 
 function App() {
   const location = useLocation();
@@ -22,6 +23,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/account/checkout" element={<CheckoutForm />} />
         <Route path="/account" element={<AccountPage/>} />
+        <Route path="/signup" element={<Signup/>} />
       </Routes>
       
        <Footer />
