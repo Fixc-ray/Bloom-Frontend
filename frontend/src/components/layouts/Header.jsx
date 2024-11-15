@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaSearch, FaUser, FaShoppingBag, FaBars, FaTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-function Header({ toggleCart }) { // Receive toggleCart as prop
+function Header({ toggleCart }) { 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const routes = [

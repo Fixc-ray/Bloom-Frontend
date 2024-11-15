@@ -9,6 +9,7 @@ import AccountPage from './components/layouts/AccountPage';
 import Signup from './components/layouts/Signup';
 import ShopAll from './components/layouts/ShopAll';
 import CartDrawer from './components/layouts/CartDrawer.jsx'; 
+import Product from './components/layouts/Product.jsx';
 
 function App() {
   const location = useLocation();
@@ -57,6 +58,7 @@ function App() {
         <Route path="/account/checkout" element={<CheckoutForm />} />
         <Route path="/account" element={<AccountPage />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/product/:id" element={<Product />} />
       </Routes>
       <CartDrawer
         isOpen={isCartOpen}
