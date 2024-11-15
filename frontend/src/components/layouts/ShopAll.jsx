@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 
-function ShopAll() {
+function ShopAll({ addToCart }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     fetch("https://bloomm-backend-1.onrender.com/products")
       .then((response) => response.json())
-      .then((data) => setProducts(data.products || [])) // Adjusted to handle response structure
+      .then((data) => setProducts(data.products || []))
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
 
   return (
-    <div className="max-w-screen-xl mx-auto p-6">
+    <div className="max-w-screen-xl mx-auto p-6 mt-20">
       {products.length === 0 ? (
         <p className="text-lg text-center text-gray-600 animate-pulse">Loading...</p>
       ) : (
@@ -31,7 +31,12 @@ function ShopAll() {
                 </div>
               </div>
               <div className="p-5">
-                <button className="w-full border border-black py-2 px-4 rounded transition duration-200">Add to Bag</button>
+                <button
+                  className="w-full border border-black py-2 px-4 rounded transition duration-200 hover:bg-black hover:text-white"
+                  onClick={() => addToCart(product)}
+                >
+                  Add to Bag
+                </button>
               </div>
               <div className="absolute top-2 right-2 bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded">New</div>
             </div>
