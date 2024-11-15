@@ -35,7 +35,7 @@ function Product() {
       />
       <div className="absolute inset-0 bg-gradient-to-t from-pink-500/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
     </div>
-    <div className="flex-1 ml-20">
+    <div className="flex-1 ml-4 sm:ml-8 md:ml-16 lg:ml-20">
       <h1 className="text-3xl mb-3 tracking-tight">
         {product.product_name}
       </h1>

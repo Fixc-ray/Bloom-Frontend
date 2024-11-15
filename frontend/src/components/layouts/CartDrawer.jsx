@@ -60,6 +60,11 @@ function CartDrawer({ isOpen, toggleCart, cartItems, updateQuantity }) {
             <div className="text-lg font-semibold border-t pt-4">
               Total: ${totalPrice.toFixed(2)}
             </div>
+            <div className="mt-6">
+              <button className="w-full bg-pink-300 text-white py-2 rounded-lg font-semibold shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:scale-105">
+                Checkout
+              </button>
+            </div>
           </div>
         )}
       </div>
