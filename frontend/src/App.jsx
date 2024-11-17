@@ -10,6 +10,7 @@ import Signup from "./components/layouts/Signup";
 import ShopAll from "./components/layouts/ShopAll";
 import CartDrawer from "./components/layouts/CartDrawer.jsx";
 import Product from "./components/layouts/Product.jsx";
+import OrderHistory from "./components/common/OrderHistory.jsx";
 
 function App() {
   const location = useLocation();
@@ -64,6 +65,12 @@ function App() {
         <Route path="/account" element={<AccountPage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/product/:id" element={<Product />} />
+        <Route
+          path="/order-history"
+          element={
+            <OrderHistory cartItems={cart} updateQuantity={updateQuantity} />
+          }
+        />
       </Routes>
       <CartDrawer
         isOpen={isCartOpen}
@@ -71,7 +78,6 @@ function App() {
         cartItems={cart}
         updateQuantity={updateQuantity}
       />
-
       {showHeaderFooter && <Footer />}
     </>
   );

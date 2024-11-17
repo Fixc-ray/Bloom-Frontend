@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import emailjs from "emailjs-com";
 
 const CheckoutForm = ({ cartItems, updateQuantity }) => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
@@ -23,20 +24,60 @@ const CheckoutForm = ({ cartItems, updateQuantity }) => {
     }));
   };
 
+  const handlePaymentMethodClick = (method) => {
+    setSelectedPaymentMethod(method);
+  };
+
+  const handleCheck = () => {
+    if (!selectedPaymentMethod) {
+      alert("Please select a payment method before continuing.");
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+
+    if (handleCheck()) {
+      console.log("Form submitted:", formData);
+      console.log("Selected Payment Method:", selectedPaymentMethod);
+      alert("Order has been placed successfully")
+    }
+
+    const cartDetails = cartItems
+      .map((item) => `${item.product_name} (x${item.quantity}): KSH ${item.price * item.quantity}`)
+      .join("\n");
+
+    const emailParams = {
+      to_email: "goriderray@gmail.com, rayjustin481@gmail.com",
+      user_name: formData.firstName,
+      user_address: formData.address,
+      user_email: formData.email,
+      cart_details: cartDetails,
+      total_price: `KSH ${subtotal}`,
+    };
+
+    emailjs
+      .send("service_koac7yy", "template_al29uyy", emailParams, "m5okyqReJXrsKPd_J")
+      .then(() => {
+        alert("Email sent successfully!");
+      })
+      .catch((error) => {
+        console.error("Error sending email:", error);
+        alert("Failed to send email.");
+      });
   };
 
   const subtotal = cartItems
     .reduce((sum, item) => sum + item.price * item.quantity, 0)
     .toFixed(2);
 
-    const handlePaymentMethodClick = (method) => {
-      setSelectedPaymentMethod(`Paid with ${method}`);
-    };
-  
 
+  const checkout = (e) => {
+    e.preventDefault();  
+
+  };
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4">
       <header className="w-full flex justify-between items-center mb-6 bg-white shadow h-20 p-6 md:px-10">
@@ -267,12 +308,10 @@ const CheckoutForm = ({ cartItems, updateQuantity }) => {
               </button>
               {selectedPaymentMethod && (
               <div className="p-4 bg-green-100 text-green-800 rounded-md">
-                {selectedPaymentMethod}
+                Successfully Paid with {selectedPaymentMethod}
               </div>
             )}
             </div>
-
-            {/* Continue to Shipping */}
             <button
               type="submit"
               className="w-full bg-primary-color text-white font-medium py-3 rounded-md hover:bg-pink-500 mt-6"
