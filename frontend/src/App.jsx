@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import Home from './pages/Home';
-import About from './components/layouts/About';
-import Header from './components/layouts/Header';
-import Footer from './components/layouts/Footer';
-import CheckoutForm from './components/layouts/CheckoutForm';
-import AccountPage from './components/layouts/AccountPage';
-import Signup from './components/layouts/Signup';
-import ShopAll from './components/layouts/ShopAll';
-import CartDrawer from './components/layouts/CartDrawer.jsx'; 
-import Product from './components/layouts/Product.jsx';
+import React, { useState } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import Home from "./pages/Home";
+import About from "./components/layouts/About";
+import Header from "./components/layouts/Header";
+import Footer from "./components/layouts/Footer";
+import CheckoutForm from "./components/layouts/CheckoutForm";
+import AccountPage from "./components/layouts/AccountPage";
+import Signup from "./components/layouts/Signup";
+import ShopAll from "./components/layouts/ShopAll";
+import CartDrawer from "./components/layouts/CartDrawer.jsx";
+import Product from "./components/layouts/Product.jsx";
 
 function App() {
   const location = useLocation();
@@ -45,7 +45,7 @@ function App() {
     setIsCartOpen(!isCartOpen);
   };
 
-  const headerFooterPaths = ['/', '/about', '/account', '/shop-all'];
+  const headerFooterPaths = ["/", "/about", "/account", "/shop-all"];
   const showHeaderFooter = headerFooterPaths.includes(location.pathname);
 
   return (
@@ -55,7 +55,12 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/shop-all" element={<ShopAll addToCart={addToCart} />} />
-        <Route path="/account/checkout" element={<CheckoutForm />} />
+        <Route
+          path="/account/checkout"
+          element={
+            <CheckoutForm cartItems={cart} updateQuantity={updateQuantity} />
+          }
+        />
         <Route path="/account" element={<AccountPage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/product/:id" element={<Product />} />
@@ -66,6 +71,7 @@ function App() {
         cartItems={cart}
         updateQuantity={updateQuantity}
       />
+
       {showHeaderFooter && <Footer />}
     </>
   );

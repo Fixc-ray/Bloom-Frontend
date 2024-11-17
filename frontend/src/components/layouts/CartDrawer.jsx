@@ -1,11 +1,18 @@
 import React from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import CheckoutForm from "./CheckoutForm"
+
 
 function CartDrawer({ isOpen, toggleCart, cartItems, updateQuantity }) {
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * (item.quantity || 1),
     0
   );
+  const navigate = useNavigate()
 
+  const goToCheckout = () => {
+    navigate('/account/checkout'); 
+  };
   return (
     <div
       className={`fixed top-0 right-0 h-full w-80 mt-14 bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
@@ -61,7 +68,7 @@ function CartDrawer({ isOpen, toggleCart, cartItems, updateQuantity }) {
               Total: ${totalPrice.toFixed(2)}
             </div>
             <div className="mt-6">
-              <button className="w-full bg-pink-300 text-white py-2 rounded-lg font-semibold shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:scale-105">
+              <button onClick={goToCheckout} className="w-full bg-pink-300 text-white py-2 rounded-lg font-semibold shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:scale-105">
                 Checkout
               </button>
             </div>
