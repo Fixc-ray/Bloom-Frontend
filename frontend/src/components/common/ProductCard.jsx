@@ -1,6 +1,5 @@
 import React from "react";
 import { Star } from "lucide-react";
-import Button from "./Button";
 
 const ProductCard = ({ product }) => {
   return (

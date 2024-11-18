@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "./Button";
 
 function ContactInformationForm() {
   const [formData, setFormData] = useState({
@@ -39,7 +40,7 @@ function ContactInformationForm() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border rounded-lg border-gray-300 shadow-sm focus:ring-pink-500 focus:border-pink-500"
+            className="mt-1 block w-full px-3 py-2 border rounded-lg border-gray-300 outline-none shadow-sm focus:ring-pink-500 focus:border-pink-500"
             placeholder="example@gmail.com"
             required
           />
@@ -60,7 +61,7 @@ function ContactInformationForm() {
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
-              className="mt-1 block w-full px-3 py-2 border rounded-lg border-gray-300 shadow-sm focus:ring-pink-500 focus:border-pink-500"
+              className="mt-1 block w-full px-3 py-2 border outline-none rounded-lg border-gray-300 shadow-sm focus:ring-pink-500 focus:border-pink-500"
               required
             />
           </div>
@@ -77,7 +78,7 @@ function ContactInformationForm() {
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
-              className="mt-1 block w-full px-3 py-2 border rounded-lg border-gray-300 shadow-sm focus:ring-pink-500 focus:border-pink-500"
+              className="mt-1 block w-full px-3 py-2 border rounded-lg outline-none border-gray-300 shadow-sm focus:ring-pink-500 focus:border-pink-500"
               required
             />
           </div>
@@ -85,12 +86,19 @@ function ContactInformationForm() {
 
         {/* Submit Button */}
         <div className="pt-4">
-          <button
+          <Button
+            onClick={() => {}}
             type="submit"
-            className="w-full py-3 bg-pink-500 text-white font-semibold rounded-lg hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+            lable={"Save"}
+            className={"w-full text-white"}
+          />
+
+          {/* <Button
+            type="submit"
+            className="w-full py-3 bg-primary-color text-white font-semibold rounded-lg hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
           >
             Save
-          </button>
+          </button> */}
         </div>
       </form>
     </div>
