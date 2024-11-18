@@ -9,7 +9,7 @@ import OnTheBlog from '../components/layouts/OnTheBlog'
 
 const Home = () => {
   return (
-     <div className='flex flex-col gap-[80px] md:gap-[60px] 2xl:gap-[80px]'>
+     <div className='flex flex-col gap-[80px] md:gap-[60px] 2xl:gap-[80px] mt-16'>
       <Hero/>
       <NewArrivals />
       <BestSellers />
