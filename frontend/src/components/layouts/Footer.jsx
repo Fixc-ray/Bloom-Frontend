@@ -49,15 +49,15 @@ const Footer = () => {
             <div className="space-y-2 text-sm text-white">
               <p className="flex items-center gap-2">
                 <Phone size={16} className="text-pink-400" />
-                + 38 050 123 45 67
+                +254 722556093
               </p>
               <p className="flex items-center gap-2">
                 <Mail size={16} className="text-pink-400" />
-                bloombt@kmail.com
+                bloombeauty@gmail.com
               </p>
               <p className="flex items-center gap-2">
                 <MapPin size={16} className="text-pink-400" />
-                Kyiv, Ukraine
+                Nairobi, kenya
               </p>
             </div>
           </div>
@@ -67,7 +67,7 @@ const Footer = () => {
             <h3 className="text-base font-medium text-[#B0A6BD] mb-4">HELP</h3>
             <ul className="space-y-2 text-white">
               <li><a href="#" className="hover:text-pink-400">Contact us</a></li>
-              <li><a href="#" className="hover:text-pink-400">FAQ</a></li>
+              <li><a href="/about" className="hover:text-pink-400">FAQ</a></li>
               <li><a href="#" className="hover:text-pink-400">Shipping & Returns</a></li>
             </ul>
           </div>
