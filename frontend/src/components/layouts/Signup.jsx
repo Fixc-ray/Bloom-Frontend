@@ -31,7 +31,7 @@ function Signup() {
           <LeftOverlayPanel signinIn={signIn}>
             <Title>Welcome Back!</Title>
             <Paragraph>
-            Sign in to check out exclusive beauty tips & products, and explore our new collections.
+              Sign in to check out exclusive beauty tips & products, and explore our new collections.
             </Paragraph>
             <GhostButton onClick={() => toggle(true)}>Sign In</GhostButton>
           </LeftOverlayPanel>
@@ -39,7 +39,7 @@ function Signup() {
           <RightOverlayPanel signinIn={signIn}>
             <Title>Hello, Friend!</Title>
             <Paragraph>
-              Join us to get personalized beauty product recommendations and start your journey with us
+              Join us to get personalized beauty product recommendations and start your journey with us.
             </Paragraph>
             <GhostButton onClick={() => toggle(false)}>Sign Up</GhostButton>
           </RightOverlayPanel>
@@ -59,6 +59,13 @@ const Container = styled.div`
   width: 678px;
   max-width: 100%;
   min-height: 400px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    min-height: 500px;
+    flex-direction: column;
+    box-shadow: none;
+  }
 `;
 
 const SignUpContainer = styled.div`
@@ -70,6 +77,7 @@ const SignUpContainer = styled.div`
   width: 50%;
   opacity: 0;
   z-index: 1;
+
   ${(props) =>
     props.signinIn !== true
       ? `
@@ -78,6 +86,13 @@ const SignUpContainer = styled.div`
     z-index: 5;
   `
       : null}
+
+  @media (max-width: 768px) {
+    width: 100%;
+    position: relative;
+    opacity: 1;
+    transform: translateX(0);
+  }
 `;
 
 const SignInContainer = styled.div`
@@ -88,7 +103,14 @@ const SignInContainer = styled.div`
   left: 0;
   width: 50%;
   z-index: 2;
+
   ${(props) => (props.signinIn !== true ? `transform: translateX(100%);` : null)}
+
+  @media (max-width: 768px) {
+    width: 100%;
+    position: relative;
+    transform: translateX(0);
+  }
 `;
 
 const Form = styled.form`
@@ -155,16 +177,18 @@ const OverlayContainer = styled.div`
   overflow: hidden;
   transition: transform 0.6s ease-in-out;
   z-index: 100;
+
   ${(props) => (props.signinIn !== true ? `transform: translateX(-100%);` : null)}
+
+  @media (max-width: 768px) {
+    width: 100%;
+    left: 0;
+    transform: translateX(0);
+  }
 `;
 
 const Overlay = styled.div`
-  background: #ff99bb;
-  background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
   background: linear-gradient(to right, #ff4b2b, #ff416c);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 0 0;
   color: #ffffff;
   position: relative;
   left: -100%;
@@ -172,7 +196,14 @@ const Overlay = styled.div`
   width: 200%;
   transform: translateX(0);
   transition: transform 0.6s ease-in-out;
+
   ${(props) => (props.signinIn !== true ? `transform: translateX(50%);` : null)}
+
+  @media (max-width: 768px) {
+    left: 0;
+    width: 100%;
+    transform: translateX(0);
+  }
 `;
 
 const OverlayPanel = styled.div`
@@ -188,17 +219,32 @@ const OverlayPanel = styled.div`
   width: 50%;
   transform: translateX(0);
   transition: transform 0.6s ease-in-out;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    position: relative;
+    padding: 20px;
+    text-align: center;
+  }
 `;
 
 const LeftOverlayPanel = styled(OverlayPanel)`
   transform: translateX(-20%);
   ${(props) => (props.signinIn !== true ? `transform: translateX(0);` : null)}
+
+  @media (max-width: 768px) {
+    transform: translateX(0);
+  }
 `;
 
 const RightOverlayPanel = styled(OverlayPanel)`
   right: 0;
   transform: translateX(0);
   ${(props) => (props.signinIn !== true ? `transform: translateX(20%);` : null)}
+
+  @media (max-width: 768px) {
+    transform: translateX(0);
+  }
 `;
 
 const Paragraph = styled.p`
@@ -207,7 +253,7 @@ const Paragraph = styled.p`
   line-height: 20px;
   letter-spacing: 0.5px;
   margin: 20px 0 30px;
-  color: #fffff;
+  color: #ffffff;
 `;
 
 export default Signup;
