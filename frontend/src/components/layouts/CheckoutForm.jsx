@@ -26,6 +26,7 @@ const CheckoutForm = ({ cartItems, updateQuantity }) => {
 
   const handlePaymentMethodClick = (method) => {
     setSelectedPaymentMethod(method);
+    window.location.href = "http://localhost:5000/pay/paypal";
   };
 
   const handleCheck = () => {
@@ -42,11 +43,16 @@ const CheckoutForm = ({ cartItems, updateQuantity }) => {
     if (handleCheck()) {
       console.log("Form submitted:", formData);
       console.log("Selected Payment Method:", selectedPaymentMethod);
-      alert("Order has been placed successfully")
+      alert("Order has been placed successfully");
     }
 
     const cartDetails = cartItems
-      .map((item) => `${item.product_name} (x${item.quantity}): KSH ${item.price * item.quantity}`)
+      .map(
+        (item) =>
+          `${item.product_name} (x${item.quantity}): KSH ${
+            item.price * item.quantity
+          }`
+      )
       .join("\n");
 
     const emailParams = {
@@ -59,7 +65,12 @@ const CheckoutForm = ({ cartItems, updateQuantity }) => {
     };
 
     emailjs
-      .send("service_koac7yy", "template_al29uyy", emailParams, "m5okyqReJXrsKPd_J")
+      .send(
+        "service_koac7yy",
+        "template_al29uyy",
+        emailParams,
+        "m5okyqReJXrsKPd_J"
+      )
       .then(() => {
         alert("Email sent successfully!");
       })
@@ -73,10 +84,8 @@ const CheckoutForm = ({ cartItems, updateQuantity }) => {
     .reduce((sum, item) => sum + item.price * item.quantity, 0)
     .toFixed(2);
 
-
   const checkout = (e) => {
-    e.preventDefault();  
-
+    e.preventDefault();
   };
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4">
@@ -108,6 +117,7 @@ const CheckoutForm = ({ cartItems, updateQuantity }) => {
                 id="email"
                 name="email"
                 placeholder="Email"
+                required
                 value={formData.email}
                 onChange={handleInputChange}
                 className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-primary-color focus:border-primary-color"
@@ -119,6 +129,7 @@ const CheckoutForm = ({ cartItems, updateQuantity }) => {
                 type="checkbox"
                 id="subscribeToNewsletter"
                 name="subscribeToNewsletter"
+                required
                 checked={formData.subscribeToNewsletter}
                 onChange={handleInputChange}
                 className="h-4 w-4 text-primary-color rounded mr-2"
@@ -148,6 +159,7 @@ const CheckoutForm = ({ cartItems, updateQuantity }) => {
                   <input
                     type="radio"
                     name="deliveryMethod"
+                    required
                     value="pickUp"
                     checked={formData.deliveryMethod === "pickUp"}
                     onChange={handleInputChange}
@@ -168,6 +180,7 @@ const CheckoutForm = ({ cartItems, updateQuantity }) => {
                 </label>
                 <input
                   type="text"
+                  required
                   id="firstName"
                   name="firstName"
                   placeholder="First Name"
@@ -186,6 +199,7 @@ const CheckoutForm = ({ cartItems, updateQuantity }) => {
                 </label>
                 <input
                   type="text"
+                  required
                   id="lastName"
                   name="lastName"
                   placeholder="Last Name"
@@ -204,6 +218,7 @@ const CheckoutForm = ({ cartItems, updateQuantity }) => {
                 Address
               </label>
               <input
+                required
                 type="text"
                 id="address"
                 name="address"
@@ -226,6 +241,7 @@ const CheckoutForm = ({ cartItems, updateQuantity }) => {
                   type="text"
                   id="city"
                   name="city"
+                  required
                   placeholder="City"
                   value={formData.city}
                   onChange={handleInputChange}
@@ -244,6 +260,7 @@ const CheckoutForm = ({ cartItems, updateQuantity }) => {
                   type="text"
                   id="postalCode"
                   name="postalCode"
+                  required
                   placeholder="Postal Code"
                   value={formData.postalCode}
                   onChange={handleInputChange}
@@ -264,6 +281,7 @@ const CheckoutForm = ({ cartItems, updateQuantity }) => {
                 id="phone"
                 name="phone"
                 placeholder="Phone"
+                required
                 value={formData.phone}
                 onChange={handleInputChange}
                 className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-primary-color focus:border-primary-color"
@@ -285,7 +303,10 @@ const CheckoutForm = ({ cartItems, updateQuantity }) => {
               <button
                 type="button"
                 className="w-full flex items-center justify-center bg-blue-600 text-white font-medium py-3 rounded-md hover:bg-blue-700"
-                onClick={() => handlePaymentMethodClick("PayPal")}
+                onClick={() => {
+                  window.location.href = "http://localhost:5000/pay/paypal";
+                  handlePaymentMethodClick("PayPal"); 
+                }}
               >
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Paypal_2014_logo.png"
@@ -294,6 +315,7 @@ const CheckoutForm = ({ cartItems, updateQuantity }) => {
                 />
                 Pay with PayPal
               </button>
+
               <button
                 type="button"
                 className="w-full flex items-center justify-center bg-white text-black font-medium py-3 rounded-md hover:bg-gray-800"
@@ -307,10 +329,10 @@ const CheckoutForm = ({ cartItems, updateQuantity }) => {
                 Pay with Apple Pay
               </button>
               {selectedPaymentMethod && (
-              <div className="p-4 bg-green-100 text-green-800 rounded-md">
-                Successfully Paid with {selectedPaymentMethod}
-              </div>
-            )}
+                <div className="p-4 bg-green-100 text-green-800 rounded-md">
+                  Successfully Paid with {selectedPaymentMethod}
+                </div>
+              )}
             </div>
             <button
               type="submit"
