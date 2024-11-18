@@ -20,14 +20,12 @@ const AddressesForm = () => (
 const OrdersTable = () => (
   <div>
     <h2 className="text-lg font-medium mb-4">Orders</h2>
-    {/* Add table for orders */}
   </div>
 );
 
 const WishlistTable = () => (
   <div>
     <h2 className="text-lg font-medium mb-4">Wishlist</h2>
-    {/* Add table for wishlist */}
   </div>
 );
 
