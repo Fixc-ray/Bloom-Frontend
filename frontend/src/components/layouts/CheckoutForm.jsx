@@ -15,6 +15,7 @@ const CheckoutForm = ({ cartItems, updateQuantity }) => {
     postalCode: "",
     phone: "",
   });
+  const url ="http://127.0.0.1:8080"
 
   const handleInputChange = (e) => {
     const { name, type, checked, value } = e.target;
@@ -26,7 +27,7 @@ const CheckoutForm = ({ cartItems, updateQuantity }) => {
 
   const handlePaymentMethodClick = (method) => {
     setSelectedPaymentMethod(method);
-    window.location.href = "http://localhost:5000/pay/paypal";
+    window.location.href = `${url}/pay/paypal`;
   };
 
   const handleCheck = () => {
@@ -304,7 +305,7 @@ const CheckoutForm = ({ cartItems, updateQuantity }) => {
                 type="button"
                 className="w-full flex items-center justify-center bg-blue-600 text-white font-medium py-3 rounded-md hover:bg-blue-700"
                 onClick={() => {
-                  window.location.href = "http://localhost:5000/pay/paypal";
+                  window.location.href = `${url}/pay/paypal`;
                   handlePaymentMethodClick("PayPal"); 
                 }}
               >
