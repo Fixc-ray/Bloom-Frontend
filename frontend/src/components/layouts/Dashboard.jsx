@@ -37,105 +37,259 @@ const StatsCard = ({ title, value, icon: Icon, trend }) => (
   </div>
 );
 
-// Recent Orders Table
-const RecentOrders = () => {
-  const orders = [
+const DataTable = ({ data, columns }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 10;
+
+  // Filter data based on search term
+  const filteredData = data.filter((item) =>
+    columns.some((column) =>
+      String(item[column.key]).toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  );
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+  const displayedData = filteredData.slice(
+    (currentPage - 1) * rowsPerPage,
+    currentPage * rowsPerPage
+  );
+
+  return (
+    <div className="bg-white p-6 rounded-lg shadow">
+      {/* Search Bar */}
+      <div className="mb-4">
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        />
+      </div>
+
+      {/* Table */}
+      <div className="overflow-x-auto">
+        <table className="min-w-full border-collapse">
+          <thead>
+            <tr className="bg-gray-100 text-left">
+              {columns.map((column) => (
+                <th
+                  key={column.key}
+                  className="py-2 px-4 border-b text-sm font-medium text-gray-600"
+                >
+                  {column.title}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {displayedData.length > 0 ? (
+              displayedData.map((row, index) => (
+                <tr key={index} className="hover:bg-gray-50">
+                  {columns.map((column) => (
+                    <td
+                      key={column.key}
+                      className="py-2 px-4 border-b text-sm text-gray-700"
+                    >
+                      {row[column.key]}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td
+                  colSpan={columns.length}
+                  className="py-2 px-4 text-center text-gray-500"
+                >
+                  No data found
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Pagination */}
+      <div className="flex justify-between items-center mt-4">
+        <p className="text-sm text-gray-600">
+          Page {currentPage} of {totalPages || 1}
+        </p>
+        <div className="flex space-x-2">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            className="px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-300 disabled:opacity-50"
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <button
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
+            className="px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-300 disabled:opacity-50"
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Customers = () => {
+  const customerData = [
+    {
+      id: 1,
+      name: "John Doe",
+      email: "john@example.com",
+      phone: "123-456-7890",
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      email: "jane@example.com",
+      phone: "987-654-3210",
+    },
+    // Add more sample data as needed
+  ];
+
+  const customerColumns = [
+    { key: "id", title: "ID" },
+    { key: "name", title: "Name" },
+    { key: "email", title: "Email" },
+    { key: "phone", title: "Phone" },
+  ];
+
+  return (
+    <div>
+      <h2 className="text-lg font-semibold mb-4">All Customers</h2>
+      <DataTable data={customerData} columns={customerColumns} />
+    </div>
+  );
+};
+const Products = () => {
+  const productData = [
+    {
+      id: 1,
+      name: "Laptop",
+      category: "Electronics",
+      price: "$999.99",
+      stock: 25,
+    },
+    {
+      id: 2,
+      name: "Smartphone",
+      category: "Electronics",
+      price: "$699.99",
+      stock: 50,
+    },
+    {
+      id: 3,
+      name: "Headphones",
+      category: "Accessories",
+      price: "$199.99",
+      stock: 150,
+    },
+    // Add more sample data as needed
+  ];
+
+  const productColumns = [
+    { key: "id", title: "ID" },
+    { key: "name", title: "Product Name" },
+    { key: "category", title: "Category" },
+    { key: "price", title: "Price" },
+    { key: "stock", title: "Stock" },
+  ];
+
+  return (
+    <div>
+      <h2 className="text-lg font-semibold mb-4">All Products</h2>
+      <DataTable data={productData} columns={productColumns} />
+    </div>
+  );
+};
+
+const Orders = () => {
+  const orderData = [
     {
       id: "#12345",
-      customer: "Justine Ray",
+      customer: "John Doe",
       product: "Gaming Mouse",
-      status: "Delivered",
       amount: "$99.99",
     },
     {
       id: "#12346",
-      customer: "Bridgite Wanjiku",
-      product: "Mechanical Keyboard",
-      status: "Processing",
+      customer: "Jane Smith",
+      product: "Keyboard",
       amount: "$159.99",
     },
-    {
-      id: "#12347",
-      customer: "Kini Brown",
-      product: "Gaming Headset",
-      status: "Pending",
-      amount: "$79.99",
-    },
+    // Add more sample data as needed
+  ];
+
+  const orderColumns = [
+    { key: "id", title: "Order ID" },
+    { key: "customer", title: "Customer" },
+    { key: "product", title: "Product" },
+    { key: "amount", title: "Amount" },
   ];
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow mt-6">
-      <h2 className="text-lg font-semibold mb-4">Recent Orders</h2>
-      <div className="overflow-x-auto">
-        <table className="w-full">
-          <thead>
-            <tr className="text-left text-gray-500">
-              <th className="pb-3">Order ID</th>
-              <th className="pb-3">Customer</th>
-              <th className="pb-3">Product</th>
-              <th className="pb-3">Status</th>
-              <th className="pb-3">Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((order) => (
-              <tr key={order.id} className="border-t">
-                <td className="py-3">{order.id}</td>
-                <td>{order.customer}</td>
-                <td>{order.product}</td>
-                <td>
-                  <span
-                    className={`px-2 py-1 rounded-full text-xs 
-                    ${
-                      order.status === "Delivered"
-                        ? "bg-green-100 text-green-800"
-                        : order.status === "Processing"
-                        ? "bg-blue-100 text-blue-800"
-                        : "bg-yellow-100 text-yellow-800"
-                    }`}
-                  >
-                    {order.status}
-                  </span>
-                </td>
-                <td>{order.amount}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+    <div>
+      <h2 className="text-lg font-semibold mb-4">All Orders</h2>
+      <DataTable data={orderData} columns={orderColumns} />
     </div>
   );
 };
 
-// Top Products Component
-const TopProducts = () => {
-  const products = [
-    { name: "Gaming Mouse", sales: 245, revenue: "$24,500" },
-    { name: "Mechanical Keyboard", sales: 190, revenue: "$30,400" },
-    { name: "Gaming Headset", sales: 175, revenue: "$13,125" },
-  ];
+// export { Customers, Orders };
 
-  return (
-    <div className="bg-white p-6 rounded-lg shadow">
-      <h2 className="text-lg font-semibold mb-4">Top Products</h2>
-      <div className="space-y-4">
-        {products.map((product, index) => (
-          <div key={index} className="flex items-center justify-between">
-            <div>
-              <p className="font-medium">{product.name}</p>
-              <p className="text-sm text-gray-500">{product.sales} sales</p>
-            </div>
-            <p className="font-semibold">{product.revenue}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-// Main Dashboard Component
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("dashboard"); // State for active tab
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case "products":
+        return <Products />;
+      case "customers":
+        return <Customers />;
+      case "orders":
+        return <Orders />;
+      default:
+        return (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <StatsCard
+              title="Total Revenue"
+              value="$54,375"
+              icon={DollarSign}
+              trend={12.5}
+            />
+            <StatsCard
+              title="Total Orders"
+              value="845"
+              icon={ShoppingCart}
+              trend={8.2}
+            />
+            <StatsCard
+              title="Total Products"
+              value="245"
+              icon={Package}
+              trend={-2.4}
+            />
+            <StatsCard
+              title="New Customers"
+              value="38"
+              icon={UserPlus}
+              trend={4.6}
+            />
+          </div>
+        );
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -173,7 +327,7 @@ const Dashboard = () => {
               <div className="flex items-center">
                 <img
                   className="h-8 w-8 rounded-full"
-                  src="/api/placeholder/32/32"
+                  src="/images/products/product2.png"
                   alt="User avatar"
                 />
                 <ChevronDown className="ml-2 h-4 w-4 text-gray-400" />
@@ -192,34 +346,50 @@ const Dashboard = () => {
         <div className="flex flex-col h-full w-64 bg-white border-r">
           <div className="flex-1 overflow-y-auto pt-20">
             <nav className="px-2 space-y-1">
-              <a
-                href="#"
-                className="flex items-center px-4 py-3 text-blue-600 bg-blue-50 rounded-lg"
+              <button
+                onClick={() => setActiveTab("dashboard")}
+                className={`flex items-center px-4 py-3 ${
+                  activeTab === "dashboard"
+                    ? "text-blue-600 bg-blue-50"
+                    : "text-gray-600"
+                } hover:bg-gray-50 rounded-lg`}
               >
                 <TrendingUp className="h-5 w-5" />
                 <span className="ml-3">Dashboard</span>
-              </a>
-              <a
-                href="#"
-                className="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg"
+              </button>
+              <button
+                onClick={() => setActiveTab("products")}
+                className={`flex items-center px-4 py-3 ${
+                  activeTab === "products"
+                    ? "text-blue-600 bg-blue-50"
+                    : "text-gray-600"
+                } hover:bg-gray-50 rounded-lg`}
               >
                 <Package className="h-5 w-5" />
                 <span className="ml-3">Products</span>
-              </a>
-              <a
-                href="#"
-                className="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg"
+              </button>
+              <button
+                onClick={() => setActiveTab("orders")}
+                className={`flex items-center px-4 py-3 ${
+                  activeTab === "orders"
+                    ? "text-blue-600 bg-blue-50"
+                    : "text-gray-600"
+                } hover:bg-gray-50 rounded-lg`}
               >
                 <ShoppingCart className="h-5 w-5" />
                 <span className="ml-3">Orders</span>
-              </a>
-              <a
-                href="#"
-                className="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg"
+              </button>
+              <button
+                onClick={() => setActiveTab("customers")}
+                className={`flex items-center px-4 py-3 ${
+                  activeTab === "customers"
+                    ? "text-blue-600 bg-blue-50"
+                    : "text-gray-600"
+                } hover:bg-gray-50 rounded-lg`}
               >
                 <Users className="h-5 w-5" />
                 <span className="ml-3">Customers</span>
-              </a>
+              </button>
             </nav>
           </div>
         </div>
@@ -231,45 +401,7 @@ const Dashboard = () => {
           sidebarOpen ? "pl-64" : "pl-0"
         }`}
       >
-        <main className="flex-1 p-6">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <StatsCard
-                title="Total Revenue"
-                value="$54,375"
-                icon={DollarSign}
-                trend={12.5}
-              />
-              <StatsCard
-                title="Total Orders"
-                value="845"
-                icon={ShoppingCart}
-                trend={8.2}
-              />
-              <StatsCard
-                title="Total Products"
-                value="245"
-                icon={Package}
-                trend={-2.4}
-              />
-              <StatsCard
-                title="New Customers"
-                value="38"
-                icon={UserPlus}
-                trend={4.6}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
-              <div className="lg:col-span-2">
-                <RecentOrders />
-              </div>
-              <div>
-                <TopProducts />
-              </div>
-            </div>
-          </div>
-        </main>
+        <main className="flex-1 p-6">{renderContent()}</main>
       </div>
     </div>
   );
