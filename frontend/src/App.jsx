@@ -14,19 +14,26 @@ import OrderHistory from "./components/common/OrderHistory.jsx";
 
 function App() {
   const location = useLocation();
+  const url = "http://127.0.0.1:8080"
   const [cart, setCart] = useState(() => {
-    // Load initial cart data from localStorage
     const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
   });
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   useEffect(() => {
-    // Save cart data to localStorage whenever it changes
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (product) => {
+
+const addToCart = async (product) => {
+  try {
+    
+    const response = await axios.post(`${url}/cart`, {
+      product_id: product.id,
+      quantity: 1,
+    });
+
     setCart((prevCart) => {
       const existingProduct = prevCart.find((item) => item.id === product.id);
       if (existingProduct) {
@@ -38,7 +45,10 @@ function App() {
       }
       return [...prevCart, { ...product, quantity: 1 }];
     });
-  };
+  } catch (error) {
+    console.error("Error adding item to cart:", error);
+  }
+};
 
   const updateQuantity = (id, newQuantity) => {
     setCart((prevCart) => {

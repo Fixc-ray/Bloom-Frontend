@@ -6,7 +6,7 @@ function ShopAll({ addToCart }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("https://bloomm-backend-1.onrender.com/products")
+    fetch("http://127.0.0.1:8080/products")
       .then((response) => response.json())
       .then((data) => setProducts(data.products || []))
       .catch((error) => console.error("Error fetching products:", error));
