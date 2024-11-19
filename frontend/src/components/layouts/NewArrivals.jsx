@@ -1,7 +1,6 @@
 import Products from "../../assets/data/Product";
 import MySlider from "../common/MySlider";
 import ProductCard from "../common/ProductCard";
-import ProductList from "../common/ProductList";
 import SectionHeader from "../common/SectionHeader";
 
 function NewArrivals() {

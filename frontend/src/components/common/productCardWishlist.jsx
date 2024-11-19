@@ -1,16 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Star } from "lucide-react";
+import { FcLikePlaceholder } from "react-icons/fc";
+import { FcLike } from "react-icons/fc";
 
-const ProductCard = ({ product }) => {
+const ProductCardWishlist = ({ product }) => {
+  const [like, setlike] = useState(false);
   return (
     <div className="max-w-[290px] flex flex-col border bg-[#FFFFFF] shadow-sm pb-[20px] rounded-[6px] gap-[10px]">
       {/* Product Image */}
-      <img
-        src={product.image}
-        alt={product.title}
-        className="object-cover object-center h-auto w-auto rounded"
-      />
 
+      <div className=" relative w-full h-full">
+        <img
+          src={product.image}
+          alt={product.title}
+          className="object-cover object-center h-auto w-auto rounded"
+        />
+        <button
+          onClick={() => setlike((prev) => !prev)}
+          className=" absolute top-1 right-1"
+        >
+          {like ? <FcLike /> : <FcLikePlaceholder />}
+        </button>
+      </div>
       <div className="flex flex-col px-5 items-start justify-start gap-[10px]">
         {/* Product Title */}
         <h3 className="text-base font-medium mb-1">{product.title}</h3>
@@ -44,4 +55,4 @@ const ProductCard = ({ product }) => {
   );
 };
 
-export default ProductCard;
+export default ProductCardWishlist;
