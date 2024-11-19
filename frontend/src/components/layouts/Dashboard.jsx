@@ -42,21 +42,21 @@ const RecentOrders = () => {
   const orders = [
     {
       id: "#12345",
-      customer: "John Doe",
+      customer: "Justine Ray",
       product: "Gaming Mouse",
       status: "Delivered",
       amount: "$99.99",
     },
     {
       id: "#12346",
-      customer: "Jane Smith",
+      customer: "Bridgite Wanjiku",
       product: "Mechanical Keyboard",
       status: "Processing",
       amount: "$159.99",
     },
     {
       id: "#12347",
-      customer: "Mike Johnson",
+      customer: "Kini Brown",
       product: "Gaming Headset",
       status: "Pending",
       amount: "$79.99",
