@@ -1,12 +1,11 @@
-
-import React, { useState } from 'react';
-import Button from './Button'
+import React, { useState } from "react";
+import Button from "./Button";
 
 function ContactInformationForm() {
   const [formData, setFormData] = useState({
-    email: '',
-    firstName: '',
-    lastName: '',
+    email: "",
+    firstName: "",
+    lastName: "",
   });
 
   const handleChange = (e) => {
@@ -20,7 +19,7 @@ function ContactInformationForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Implement form submission logic here
-    console.log('Form submitted:', formData);
+    console.log("Form submitted:", formData);
   };
 
   return (
@@ -29,7 +28,10 @@ function ContactInformationForm() {
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Email Field */}
         <div>
-          <label className="block text-sm font-medium text-gray-700" htmlFor="email">
+          <label
+            className="block text-sm font-medium text-gray-700"
+            htmlFor="email"
+          >
             Mail
           </label>
           <input
@@ -47,7 +49,10 @@ function ContactInformationForm() {
         {/* Name Fields */}
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700" htmlFor="firstName">
+            <label
+              className="block text-sm font-medium text-gray-700"
+              htmlFor="firstName"
+            >
               First Name
             </label>
             <input
@@ -61,7 +66,10 @@ function ContactInformationForm() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700" htmlFor="lastName">
+            <label
+              className="block text-sm font-medium text-gray-700"
+              htmlFor="lastName"
+            >
               Last Name
             </label>
             <input
@@ -78,7 +86,12 @@ function ContactInformationForm() {
 
         {/* Submit Button */}
         <div className="pt-4">
-          <Button onClick={()=>{}}  type="submit" lable={'Save'} className={'w-full text-white'} />
+          <Button
+            onClick={() => {}}
+            type="submit"
+            lable={"Save"}
+            className={"w-full text-white"}
+          />
 
           {/* <Button
             type="submit"

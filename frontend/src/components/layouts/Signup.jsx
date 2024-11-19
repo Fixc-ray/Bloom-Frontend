@@ -1,28 +1,118 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import axios from "axios"; 
 
 function Signup() {
   const [signIn, toggle] = useState(true);
+  const [first_name, setFirst_name] = useState("");
+  const [password, setPassword] = useState("");
+  const [last_name, setLast_name] = useState("")
+  const [address, setAddress] = useState("");
+  const [phone_number, setPhone_number] = useState("")
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState(null); // To handle error messages
+  const navigate = useNavigate();
+  const url = "http://127.0.0.1:8080/";
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    if (!first_name || !email || !password) {
+      setError("All fields are required.");
+      return;
+    }
+    try {
+      const res = await axios.post(`${url}register`, { first_name, password, email, last_name, address, phone_number });
+      alert(res.data.message);
+      toggle(true); 
+      setError(null);
+    } catch (error) {
+      setError(error.response?.data?.message || "Registration failed");
+    }
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (!first_name || !password) {
+      setError("Both fields are required.");
+      return;
+    }
+    try {
+      const res = await axios.post(`${url}/login`, { first_name, password });
+      localStorage.setItem('token', res.data.access_token);
+      localStorage.setItem('user', JSON.stringify(res.data.user));
+      alert('Login successful!'); 
+      navigate('/');
+      setError(null);
+    } catch (error) {
+      setError(error.response?.data?.message || 'Login failed');
+    }
+  };
 
   return (
     <Container>
+      {error && <ErrorMessage>{error}</ErrorMessage>}
       <SignUpContainer signinIn={signIn}>
-        <Form>
+        <Form onSubmit={handleRegister}>
           <Title>Create Account</Title>
-          <Input type="text" placeholder="Name" />
-          <Input type="email" placeholder="Email" />
-          <Input type="password" placeholder="Password" />
-          <Button>Sign Up</Button>
+          <Input 
+            type="text" 
+            placeholder="Name" 
+            value={first_name}
+            onChange={(e) => setFirst_name(e.target.value)} 
+          />
+          <Input 
+            type="text" 
+            placeholder="Last Name" 
+            value={last_name}
+            onChange={(e) => setLast_name(e.target.value)} 
+          />
+          <Input 
+            type="email" 
+            placeholder="Email" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)} 
+          />
+          <Input 
+            type="password" 
+            placeholder="Password" 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)} 
+          />
+          <Input 
+            type="text" 
+            placeholder="address" 
+            value={address}
+            onChange={(e) => setAddress(e.target.value)} 
+          />
+          <Input 
+            type="number" 
+            placeholder="phone_number" 
+            value={phone_number}
+            onChange={(e) => setPhone_number(e.target.value)} 
+          />
+
+          <Button type="submit">Sign Up</Button>
         </Form>
       </SignUpContainer>
 
       <SignInContainer signinIn={signIn}>
-        <Form>
+        <Form onSubmit={handleLogin}>
           <Title>Sign in</Title>
-          <Input type="email" placeholder="Email" />
-          <Input type="password" placeholder="Password" />
+          <Input 
+            type="text" 
+            placeholder="Name" 
+            value={first_name}
+            onChange={(e) => setFirst_name(e.target.value)} 
+          />
+          <Input 
+            type="password" 
+            placeholder="Password" 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)} 
+          />
           <Anchor href="#">Forgot your password?</Anchor>
-          <Button>Sign In</Button>
+          <Button type="submit">Sign In</Button>
         </Form>
       </SignInContainer>
 
@@ -39,7 +129,7 @@ function Signup() {
           <RightOverlayPanel signinIn={signIn}>
             <Title>Hello, Friend!</Title>
             <Paragraph>
-              Join us to get personalized beauty product recommendations and start your journey with us
+              Join us to get personalized beauty product recommendations and start your journey with us.
             </Paragraph>
             <GhostButton onClick={() => toggle(false)}>Sign Up</GhostButton>
           </RightOverlayPanel>
@@ -49,7 +139,6 @@ function Signup() {
   );
 }
 
-// Styled Components
 const Container = styled.div`
   background-color: #ffe6f0;
   border-radius: 10px;
@@ -62,6 +151,15 @@ const Container = styled.div`
   width: 678px;
   max-width: 100%;
   min-height: 400px;
+`;
+
+const ErrorMessage = styled.div`
+  color: red;
+  background-color: #ffe6e6;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  text-align: center;
 `;
 
 const SignUpContainer = styled.div`

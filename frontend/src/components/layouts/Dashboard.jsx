@@ -217,12 +217,13 @@ const Orders = () => {
   const orderData = [
     {
       id: "#12345",
-      customer: "John Doe",
+      customer: "Justine Ray",
       product: "Gaming Mouse",
       amount: "$99.99",
     },
     {
       id: "#12346",
+<<<<<<< HEAD
       customer: "Jane Smith",
       product: "Keyboard",
       amount: "$159.99",
@@ -235,6 +236,20 @@ const Orders = () => {
     { key: "customer", title: "Customer" },
     { key: "product", title: "Product" },
     { key: "amount", title: "Amount" },
+=======
+      customer: "Bridgite Wanjiku",
+      product: "Mechanical Keyboard",
+      status: "Processing",
+      amount: "$159.99",
+    },
+    {
+      id: "#12347",
+      customer: "Kini Brown",
+      product: "Gaming Headset",
+      status: "Pending",
+      amount: "$79.99",
+    },
+>>>>>>> Development
   ];
 
   return (
