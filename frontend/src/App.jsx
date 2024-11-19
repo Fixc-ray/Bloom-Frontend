@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./components/layouts/About";
@@ -14,8 +14,17 @@ import OrderHistory from "./components/common/OrderHistory.jsx";
 
 function App() {
   const location = useLocation();
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    // Load initial cart data from localStorage
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
   const [isCartOpen, setIsCartOpen] = useState(false);
+
+  useEffect(() => {
+    // Save cart data to localStorage whenever it changes
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const addToCart = (product) => {
     setCart((prevCart) => {
