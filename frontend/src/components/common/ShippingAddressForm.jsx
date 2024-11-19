@@ -1,6 +1,5 @@
-
-import React from 'react';
-import Button from './Button';
+import React from "react";
+import Button from "./Button";
 
 const ShippingAddressForm = () => {
   return (
@@ -72,8 +71,12 @@ const ShippingAddressForm = () => {
             The recipient is not me
           </label>
         </div>
-        <Button onClick={()=>{}}  type="submit" lable={'Save'} className={'w-full text-white'} />
-
+        <Button
+          onClick={() => {}}
+          type="submit"
+          lable={"Save"}
+          className={"w-full text-white"}
+        />
       </form>
     </div>
   );
