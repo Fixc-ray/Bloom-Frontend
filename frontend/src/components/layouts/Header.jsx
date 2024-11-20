@@ -8,8 +8,6 @@ function Header({ toggleCart }) {
   const routes = [
     { name: 'Home', path: '/' },
     { name: 'Shop All', path: '/shop-all' },
-    { name: 'Bestsellers', path: '/best-sellers' },
-    { name: 'Collection', path: '/collection' },
     { name: 'About Us', path: '/about' },
     { name: 'Blog', path: '/blog' },
   ];
