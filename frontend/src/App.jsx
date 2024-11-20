@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./components/layouts/About";
@@ -11,12 +11,22 @@ import ShopAll from "./components/layouts/ShopAll";
 import CartDrawer from "./components/layouts/CartDrawer.jsx";
 import Product from "./components/layouts/Product.jsx";
 import OrderHistory from "./components/common/OrderHistory.jsx";
+import Ultrafilter from './components/layouts/ultrafilter';
 
 function App() {
   const location = useLocation();
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
   const [isCartOpen, setIsCartOpen] = useState(false);
 
+  // Sync cart state with localStorage
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  // Function to add a product to the cart
   const addToCart = (product) => {
     setCart((prevCart) => {
       const existingProduct = prevCart.find((item) => item.id === product.id);
@@ -31,6 +41,7 @@ function App() {
     });
   };
 
+  // Function to update the quantity of a product in the cart
   const updateQuantity = (id, newQuantity) => {
     setCart((prevCart) => {
       if (newQuantity === 0) {
@@ -42,10 +53,12 @@ function App() {
     });
   };
 
+  // Function to toggle the cart drawer
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
   };
 
+  // Determine if Header and Footer should be displayed
   const headerFooterPaths = ["/", "/about", "/account", "/shop-all"];
   const showHeaderFooter = headerFooterPaths.includes(location.pathname);
 
