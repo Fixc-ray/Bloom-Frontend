@@ -11,25 +11,40 @@ function Signup() {
   const [address, setAddress] = useState("");
   const [phone_number, setPhone_number] = useState("")
   const [email, setEmail] = useState("");
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null); // To handle error messages
   const navigate = useNavigate();
   const url = "http://127.0.0.1:8080/";
-
   const handleRegister = async (e) => {
     e.preventDefault();
-    if (!first_name || !email || !password) {
-      setError("All fields are required.");
+  
+    // Validate required fields
+    if (!first_name || !email || !password || !address) {
+      setError("All fields (First Name, Email, Password, Address) are required.");
       return;
     }
+  
     try {
-      const res = await axios.post(`${url}register`, { first_name, password, email, last_name, address, phone_number });
+      const res = await axios.post(`${url}register`, {
+        first_name,
+        last_name,
+        email,
+        password,
+        address,
+        phone_number, // Include phone_number as it is optional in the backend
+      });
+  
+      // Notify user and toggle to Sign In view
       alert(res.data.message);
       toggle(true); 
-      setError(null);
+      setError(null); // Clear any existing error
     } catch (error) {
-      setError(error.response?.data?.message || "Registration failed");
+      // Handle server or validation errors
+      setError(
+        error.response?.data?.message || "Registration failed. Please try again."
+      );
     }
   };
+  
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -42,7 +57,7 @@ function Signup() {
       localStorage.setItem('token', res.data.access_token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
       alert('Login successful!'); 
-      navigate('/');
+      navigate('/account');
       setError(null);
     } catch (error) {
       setError(error.response?.data?.message || 'Login failed');

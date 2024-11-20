@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./components/layouts/About";
 import Header from "./components/layouts/Header";
@@ -11,10 +11,15 @@ import ShopAll from "./components/layouts/ShopAll";
 import CartDrawer from "./components/layouts/CartDrawer.jsx";
 import Product from "./components/layouts/Product.jsx";
 import OrderHistory from "./components/common/OrderHistory.jsx";
-import Ultrafilter from './components/layouts/ultrafilter';
+import Dashboard from "./components/layouts/Dashboard.jsx";
 
 function App() {
   const location = useLocation();
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    const user = localStorage.getItem("user");
+    return Boolean(user); // Assumes "user" is stored after signup/login
+  });
+
   const [cart, setCart] = useState(() => {
     const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
@@ -62,11 +67,18 @@ function App() {
   const headerFooterPaths = ["/", "/about", "/account", "/shop-all"];
   const showHeaderFooter = headerFooterPaths.includes(location.pathname);
 
+  // Redirect unauthenticated users to the signup page
+  if (!isAuthenticated && location.pathname !== "/signup") {
+    return <Navigate to="/signup" />;
+  }
+
   return (
     <>
       {showHeaderFooter && <Header toggleCart={toggleCart} />}
       <Routes>
+        <Route path="/signup" element={<Signup setIsAuthenticated={setIsAuthenticated} />} />
         <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/about" element={<About />} />
         <Route path="/shop-all" element={<ShopAll addToCart={addToCart} />} />
         <Route
@@ -76,7 +88,6 @@ function App() {
           }
         />
         <Route path="/account" element={<AccountPage />} />
-        <Route path="/signup" element={<Signup />} />
         <Route path="/product/:id" element={<Product />} />
         <Route
           path="/order-history"
