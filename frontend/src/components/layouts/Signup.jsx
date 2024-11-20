@@ -11,7 +11,7 @@ function Signup() {
   const [address, setAddress] = useState("");
   const [phone_number, setPhone_number] = useState("")
   const [email, setEmail] = useState("");
-  const [error, setError] = useState(null); // To handle error messages
+  const [error, setError] = useState(null); 
   const navigate = useNavigate();
   const url = "http://127.0.0.1:8080/";
 

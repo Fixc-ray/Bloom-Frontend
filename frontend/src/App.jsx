@@ -15,17 +15,17 @@ import OrderHistory from "./components/common/OrderHistory.jsx";
 function App() {
   const location = useLocation();
   const [cart, setCart] = useState(() => {
-    // Initialize the cart state from local storage, or as an empty array if not present
     const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
   });
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  // Effect to save cart to local storage whenever it changes
+  // Sync cart state with localStorage
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
+  // Function to add a product to the cart
   const addToCart = (product) => {
     setCart((prevCart) => {
       const existingProduct = prevCart.find((item) => item.id === product.id);
@@ -40,6 +40,7 @@ function App() {
     });
   };
 
+  // Function to update the quantity of a product in the cart
   const updateQuantity = (id, newQuantity) => {
     setCart((prevCart) => {
       if (newQuantity === 0) {
@@ -51,10 +52,12 @@ function App() {
     });
   };
 
+  // Function to toggle the cart drawer
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
   };
 
+  // Determine if Header and Footer should be displayed
   const headerFooterPaths = ["/", "/about", "/account", "/shop-all"];
   const showHeaderFooter = headerFooterPaths.includes(location.pathname);
 
