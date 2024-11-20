@@ -11,6 +11,7 @@ import ShopAll from "./components/layouts/ShopAll";
 import CartDrawer from "./components/layouts/CartDrawer.jsx";
 import Product from "./components/layouts/Product.jsx";
 import OrderHistory from "./components/common/OrderHistory.jsx";
+import Ultrafilter from './components/layouts/ultrafilter';
 
 function App() {
   const location = useLocation();
