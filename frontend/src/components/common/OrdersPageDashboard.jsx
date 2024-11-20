@@ -4,13 +4,13 @@ const OrdersPageDashboard = () => {
   const orderData = [
     {
       id: "#12345",
-      customer: "John Doe",
+      customer: "Jane Alaa",
       product: "Gaming Mouse",
       amount: "$99.99",
     },
     {
       id: "#12346",
-      customer: "Jane Smith",
+      customer: "Justine Ray",
       product: "Keyboard",
       amount: "$159.99",
     },
