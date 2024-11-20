@@ -144,13 +144,13 @@ const Customers = () => {
   const customerData = [
     {
       id: 1,
-      name: "John Doe",
+      name: "Jane Alaa",
       email: "john@example.com",
       phone: "123-456-7890",
     },
     {
       id: 2,
-      name: "Jane Smith",
+      name: "Justine Ray",
       email: "jane@example.com",
       phone: "987-654-3210",
     },
@@ -217,13 +217,13 @@ const Orders = () => {
   const orderData = [
     {
       id: "#12345",
-      customer: "John Doe",
+      customer: "Jane Alaa",
       product: "Gaming Mouse",
       amount: "$99.99",
     },
     {
       id: "#12346",
-      customer: "Jane Smith",
+      customer: "Justine Ray",
       product: "Keyboard",
       amount: "$159.99",
     },
