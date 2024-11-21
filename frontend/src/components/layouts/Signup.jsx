@@ -36,33 +36,44 @@ function Signup() {
       // Notify user and toggle to Sign In view
       alert(res.data.message);
       toggle(true); 
-      setError(null); // Clear any existing error
+      setError(null);
     } catch (error) {
-      // Handle server or validation errors
       setError(
         error.response?.data?.message || "Registration failed. Please try again."
       );
     }
   };
-  
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    if (!first_name || !password) {
-      setError("Both fields are required.");
-      return;
-    }
-    try {
-      const res = await axios.post(`${url}/login`, { first_name, password });
-      localStorage.setItem('token', res.data.access_token);
-      localStorage.setItem('user', JSON.stringify(res.data.user));
-      alert('Login successful!'); 
-      navigate('/account');
-      setError(null);
-    } catch (error) {
-      setError(error.response?.data?.message || 'Login failed');
+  const handleRoleBasedRedirect = (email, password, navigate) => {
+    if (email === "rayjustin481@gmail.com" && password === "liverpoolfc") {
+      alert("Admin login successful!");
+      navigate("/admin"); 
+    } else {
+      alert("Login successful!");
+      navigate("/account");
     }
   };
+  const handleLogin = async (e) => {
+    e.preventDefault();
+  
+    if (!email || !password) {
+      setError("Both email and password are required.");
+      return;
+    }
+  
+    try {
+      const res = await axios.post(`${url}/login`, { email, password });
+  
+      localStorage.setItem("token", res.data.access_token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+  
+      handleRoleBasedRedirect(email, password, navigate);
+  
+      setError(null); 
+    } catch (error) {
+      setError(error.response?.data?.message || "Login failed");
+    }
+  };
+  
 
   return (
     <Container>
@@ -116,9 +127,9 @@ function Signup() {
           <Title>Sign in</Title>
           <Input 
             type="text" 
-            placeholder="Name" 
-            value={first_name}
-            onChange={(e) => setFirst_name(e.target.value)} 
+            placeholder="Email" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)} 
           />
           <Input 
             type="password" 

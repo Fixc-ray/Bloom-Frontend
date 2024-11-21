@@ -141,17 +141,6 @@ const Dashboard = () => {
                 <span className="ml-3">Products</span>
               </button>
               <button
-                onClick={() => setActiveTab("orders")}
-                className={`flex items-center px-4 py-3 ${
-                  activeTab === "orders"
-                    ? "text-blue-600 bg-blue-50"
-                    : "text-gray-600"
-                } hover:bg-gray-50 rounded-lg`}
-              >
-                <ShoppingCart className="h-5 w-5" />
-                <span className="ml-3">Orders</span>
-              </button>
-              <button
                 onClick={() => setActiveTab("customers")}
                 className={`flex items-center px-4 py-3 ${
                   activeTab === "customers"
