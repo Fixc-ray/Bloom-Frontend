@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Star } from "lucide-react";
 import Ultrafilter from "./ultrafilter";
+import DataTable from "../common/Datatable";
 
 function ShopAll({ addToCart }) {
   const [products, setProducts] = useState([]);
@@ -56,6 +57,17 @@ function ShopAll({ addToCart }) {
       </p>
     );
   }
+  <DataTable 
+  data={filteredProducts} 
+  columns={[
+    { key: 'id', title: 'ID' },
+    { key: 'product_name', title: 'Product Name' },
+    { key: 'price', title: 'Price' },
+    { key: 'actions', title: 'Actions' }
+  ]} 
+  onEdit={(row) => console.log('Edit', row)}
+  onDelete={(id) => console.log('Delete', id)}
+/>
 
   return (
     <div className="max-w-screen-xl mx-auto p-6 mt-20">
@@ -64,7 +76,6 @@ function ShopAll({ addToCart }) {
         <div className="w-1/4 bg-white p-4 rounded-lg shadow-lg">
           <Ultrafilter onFilterChange={handleFilterChange} />
         </div>
-
         {/* Product Grid Section */}
         <div className="flex-1">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 ml-20">

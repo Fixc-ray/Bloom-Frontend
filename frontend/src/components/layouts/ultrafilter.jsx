@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 function Ultrafilter({ onFilterChange }) {
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
@@ -32,3 +34,5 @@ function Ultrafilter({ onFilterChange }) {
     </div>
   );
 }
+
+export default Ultrafilter;
