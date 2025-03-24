@@ -6,7 +6,7 @@ const CustomersPageDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const API_URL = "http://127.0.0.1:8080/customers";
+  const API_URL = "https://bloomm-backend-2.onrender.com/customers";
 
   useEffect(() => {
     fetchCustomers();

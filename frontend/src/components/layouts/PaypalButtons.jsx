@@ -5,7 +5,7 @@ const PayPalButton = ({ totalAmount }) => {
   const [orderID, setOrderID] = useState('');
 
   const createOrder = () => {
-    return fetch('http://127.0.0.1:5000/orders', {
+    return fetch('https://bloomm-backend-2.onrender.com/orders', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

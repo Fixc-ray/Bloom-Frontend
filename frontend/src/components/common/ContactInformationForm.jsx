@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function ContactInformationForm() {
   const [customers, setCustomer] = useState({});
   const navigate = useNavigate(); 
-  const url = "http://127.0.0.1:8080/";
+  const url = "https://bloomm-backend-2.onrender.com/";
 
   useEffect(() => {
     const userData = localStorage.getItem('user');

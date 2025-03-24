@@ -11,7 +11,7 @@ function ShopAll({ addToCart }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8080/products")
+    fetch("https://bloomm-backend-2.onrender.com/products")
       .then((response) => response.json())
       .then((data) => {
         const productsList = data.products || [];
