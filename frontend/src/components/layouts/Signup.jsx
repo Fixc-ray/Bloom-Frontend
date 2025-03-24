@@ -13,7 +13,7 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const url = "http://127.0.0.1:8080/";
+  const url = "https://bloomm-backend-2.onrender.com/register";
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -34,7 +34,7 @@ function Signup() {
       });
 
       alert(res.data.message);
-      toggle(true); // Switch back to login view
+      toggle(true);
       setError(null);
     } catch (error) {
       setError(
@@ -57,9 +57,9 @@ function Signup() {
       localStorage.setItem("token", res.data.access_token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      if (first_name === "admin" && password === "liverpoolfc") {
+      if (first_name === "Justin" && password === "Justin") {
         alert("Admin login successful!");
-        navigate("/admin");
+        navigate("/dashboard");
       } else {
         alert("Login successful!");
         navigate("/account");
